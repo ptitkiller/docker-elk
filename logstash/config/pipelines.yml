@@ -5,5 +5,9 @@
 
 - pipeline.id: smm-football-feed
   path.config: "/usr/share/logstash/pipeline/smm-football-feed.conf"
-- pipeline.id: comment
+- pipeline.id: smm-football-comment
   path.config: "/usr/share/logstash/pipeline/smm-football-comment.conf"
+- pipeline.id: smm-mobile-feed
+  path.config: "/usr/share/logstash/pipeline/smm-mobile-feed.conf"
+- pipeline.id: smm-mobile-comment
+  path.config: "/usr/share/logstash/pipeline/smm-mobile-comment.conf"
