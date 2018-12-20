@@ -2,24 +2,24 @@ version: '3.3'
 
 services:
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.0
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    configs:
-      - source: elastic_config
-        target: /usr/share/elasticsearch/config/elasticsearch.yml
-    environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-    networks:
-      - elk
-    deploy:
-      mode: replicated
-      replicas: 1
+  # elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+  #   ports:
+  #     - "9200:9200"
+  #     - "9300:9300"
+  #   configs:
+  #     - source: elastic_config
+  #       target: /usr/share/elasticsearch/config/elasticsearch.yml
+  #   environment:
+  #     ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+  #   networks:
+  #     - elk
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
 
   logstash:
-    image: docker.elastic.co/logstash/logstash-oss:6.4.0
+    image: docker.elastic.co/logstash/logstash:5.5.3
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -29,25 +29,25 @@ services:
       - source: logstash_pipeline
         target: /usr/share/logstash/pipeline/logstash.conf
     environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      LS_JAVA_OPTS: "-Xmx1.5g -Xms1.5g"
     networks:
       - elk
     deploy:
       mode: replicated
       replicas: 1
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.4.0
-    ports:
-      - "5601:5601"
-    configs:
-      - source: kibana_config
-        target: /usr/share/kibana/config/kibana.yml
-    networks:
-      - elk
-    deploy:
-      mode: replicated
-      replicas: 1
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:6.4.0
+  #   ports:
+  #     - "5601:5601"
+  #   configs:
+  #     - source: kibana_config
+  #       target: /usr/share/kibana/config/kibana.yml
+  #   networks:
+  #     - elk
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
 
 configs:
 
