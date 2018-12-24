@@ -5,7 +5,6 @@
 
 - pipeline.id: smm-football
   path.config: "/usr/share/logstash/pipeline/smm-football.conf"
-  pipeline.workers: 3
 # - pipeline.id: smm-mobile-feed
 #   path.config: "/usr/share/logstash/pipeline/smm-mobile-feed.conf"
 #   pipeline.workers: 2
