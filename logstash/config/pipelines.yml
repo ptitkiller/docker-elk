@@ -11,3 +11,7 @@
   path.config: "/usr/share/logstash/pipeline/smm-mobile-feed.conf"
 - pipeline.id: smm-mobile-comment
   path.config: "/usr/share/logstash/pipeline/smm-mobile-comment.conf"
+- pipeline.id: smm-cars-feed
+  path.config: "/usr/share/logstash/pipeline/smm-cars-feed.conf"
+- pipeline.id: smm-cars-comment
+  path.config: "/usr/share/logstash/pipeline/smm-cars-comment.conf"
