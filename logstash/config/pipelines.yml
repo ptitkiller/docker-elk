@@ -3,21 +3,18 @@
 # For more information on multiple pipelines, see the documentation:
 #   https://www.elastic.co/guide/en/logstash/current/multiple-pipelines.html
 
-- pipeline.id: smm-football-feed
-  path.config: "/usr/share/logstash/pipeline/smm-football-feed.conf"
-  pipeline.workers: 2
-- pipeline.id: smm-football-comment
-  path.config: "/usr/share/logstash/pipeline/smm-football-comment.conf"
-  pipeline.workers: 2
-- pipeline.id: smm-mobile-feed
-  path.config: "/usr/share/logstash/pipeline/smm-mobile-feed.conf"
-  pipeline.workers: 2
-- pipeline.id: smm-mobile-comment
-  path.config: "/usr/share/logstash/pipeline/smm-mobile-comment.conf"
-  pipeline.workers: 2
-- pipeline.id: smm-cars-feed
-  path.config: "/usr/share/logstash/pipeline/smm-cars-feed.conf"
-  pipeline.workers: 2
-- pipeline.id: smm-cars-comment
-  path.config: "/usr/share/logstash/pipeline/smm-cars-comment.conf"
+- pipeline.id: smm-football
+  path.config: "/usr/share/logstash/pipeline/smm-football.conf"
   pipeline.workers: 3
+# - pipeline.id: smm-mobile-feed
+#   path.config: "/usr/share/logstash/pipeline/smm-mobile-feed.conf"
+#   pipeline.workers: 2
+# - pipeline.id: smm-mobile-comment
+#   path.config: "/usr/share/logstash/pipeline/smm-mobile-comment.conf"
+#   pipeline.workers: 2
+# - pipeline.id: smm-cars-feed
+#   path.config: "/usr/share/logstash/pipeline/smm-cars-feed.conf"
+#   pipeline.workers: 2
+# - pipeline.id: smm-cars-comment
+#   path.config: "/usr/share/logstash/pipeline/smm-cars-comment.conf"
+#   pipeline.workers: 3
