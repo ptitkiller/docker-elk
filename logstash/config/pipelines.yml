@@ -3,8 +3,8 @@
 # For more information on multiple pipelines, see the documentation:
 #   https://www.elastic.co/guide/en/logstash/current/multiple-pipelines.html
 
-- pipeline.id: smm-football
-  path.config: "/usr/share/logstash/pipeline/smm-football.conf"
+- pipeline.id: smm
+  path.config: "/usr/share/logstash/pipeline/smm.conf"
 # - pipeline.id: smm-mobile-feed
 #   path.config: "/usr/share/logstash/pipeline/smm-mobile-feed.conf"
 #   pipeline.workers: 2
