@@ -5,6 +5,7 @@
 
 - pipeline.id: smm
   path.config: "/usr/share/logstash/pipeline/smm.conf"
+  node.name: "node1"
 # - pipeline.id: smm-mobile-feed
 #   path.config: "/usr/share/logstash/pipeline/smm-mobile-feed.conf"
 #   pipeline.workers: 2
