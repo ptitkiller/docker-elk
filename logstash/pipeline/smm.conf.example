@@ -1,0 +1,44 @@
+input {
+  elasticsearch {
+    hosts => ["125.212.211.61:9200"]
+    index => "smm"
+    size => 200
+    docinfo => true
+    scroll => "5m"
+    query => '{"query":{"bool":{"must":[{"term":{"_type":"feed"}},{"term":{"industry":{"value":"cars"}}}]}},"sort":[{"createdTime":{"order":"asc"}}]}'
+  }
+}
+
+filter {
+    mutate  {
+        gsub => [
+          "page", "%{industry}_", "",
+          "shareFrom","%{industry}_","",
+          "feed","%{industry}_","",
+          "comment","%{industry}_",""
+        ]
+        remove_field => [ "logErrorCrawler","logDetailErrorCrawler","segments","topics","number_extracted_words","number_rejected_words","defaultAspects","defaultEntities","lastUpdateTime","pid","ptype","pindex","platfrom","unchangedTime","isAd","isHam","isQuest","isSentiment","comments"]
+        copy => { "isCarRelated" => "isSubjectRelated" }
+        update => { "lastUpdatedTime" => "%{@timestamp}"}
+        add_field => { 
+			"industries" => ["celebrity","cars"] 
+			"docType" => "%{[@metadata][_type]}"
+		} 
+    }
+}
+
+output {
+  elasticsearch {
+    hosts => "elasticsearch:9200"
+    index => "smm-v10"
+    document_id => "%{platform}_%{id}"
+    action => update
+	user => elastic
+	password => dazikzak
+    doc_as_upsert => "true"
+    script => 'if(["youtube","instagram","facebook"].contains("%{platform}") && !ctx._source.industries.contains("%{industry}")){ctx._source.industries.add("%{industry}");}ctx._source.lastUpdatedTime="%{@timestamp}";'
+ }
+  stdout {
+    codec => "dots"
+  }
+}
