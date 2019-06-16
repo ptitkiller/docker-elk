@@ -21,9 +21,9 @@ filter {
         copy => { "isCarRelated" => "isSubjectRelated" }
         update => { "lastUpdatedTime" => "%{@timestamp}"}
         add_field => { 
-			"industries" => ["celebrity","cars"] 
-			"docType" => "%{[@metadata][_type]}"
-		} 
+          "industries" => ["celebrity","cars"] 
+          "docType" => "%{[@metadata][_type]}"
+        } 
     }
 }
 
@@ -32,11 +32,8 @@ output {
     hosts => "elasticsearch:9200"
     index => "smm-v10"
     document_id => "%{platform}_%{id}"
-    action => update
-	user => elastic
-	password => dazikzak
-    doc_as_upsert => "true"
-    script => 'if(["youtube","instagram","facebook"].contains("%{platform}") && !ctx._source.industries.contains("%{industry}")){ctx._source.industries.add("%{industry}");}ctx._source.lastUpdatedTime="%{@timestamp}";'
+	  user => elastic
+	  password => dazikzak
  }
   stdout {
     codec => "dots"
