@@ -5,7 +5,7 @@ input {
     size => 200
     docinfo => true
     scroll => "5m"
-    query => '{"query":{"bool":{"must":[{"term":{"_type":"feed"}},{"term":{"industry":{"value":"cars"}}}]}},"sort":[{"createdTime":{"order":"asc"}}]}'
+    query => '{"query":{"bool":{"filter":{"range":{"createdTime":{"gte":"2019-01-01T00:00:00.000Z","lte":"2020-01-01T00:00:00.000Z"}}},"must":[{"term":{"_type":"feed"}},{"term":{"industry":{"value":"cars"}}}]}},"sort":[{"createdTime":{"order":"asc"}}]}'
   }
 }
 
@@ -17,7 +17,7 @@ filter {
           "feed","%{industry}_","",
           "comment","%{industry}_",""
         ]
-        remove_field => [ "logErrorCrawler","logDetailErrorCrawler","segments","topics","number_extracted_words","number_rejected_words","defaultAspects","defaultEntities","lastUpdateTime","pid","ptype","pindex","platfrom","unchangedTime","isAd","isHam","isQuest","isSentiment","comments"]
+        remove_field => [ "logErrorCrawler","logDetailErrorCrawler","segments","topics", "tags_custom", "number_extracted_words","number_rejected_words","defaultAspects","defaultEntities","lastUpdateTime","pid","ptype","pindex","platfrom","unchangedTime","isAd","isHam","isQuest","isSentiment","comments"]
         copy => { "isCarRelated" => "isSubjectRelated" }
         update => { "lastUpdatedTime" => "%{@timestamp}"}
         
