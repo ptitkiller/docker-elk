@@ -1,6 +1,6 @@
 input {
   elasticsearch {
-    hosts => ["125.212.211.61:9200"]
+    hosts => ["125.212.211.60:9200"]
     index => "smm"
     size => 200
     docinfo => true
@@ -20,17 +20,21 @@ filter {
         remove_field => [ "logErrorCrawler","logDetailErrorCrawler","segments","topics","number_extracted_words","number_rejected_words","defaultAspects","defaultEntities","lastUpdateTime","pid","ptype","pindex","platfrom","unchangedTime","isAd","isHam","isQuest","isSentiment","comments"]
         copy => { "isCarRelated" => "isSubjectRelated" }
         update => { "lastUpdatedTime" => "%{@timestamp}"}
+        
         add_field => { 
           "industries" => ["celebrity","cars"] 
           "docType" => "%{[@metadata][_type]}"
-        } 
+        }
+    }
+    ruby {
+        code => 'event.set("[@metadata][created_time]", Date.parse(event.get("createdTime")).strftime("%Y-%m"))'
     }
 }
 
 output {
   elasticsearch {
     hosts => "elasticsearch:9200"
-    index => "smm-v10"
+    index => "smm-v10-%{[@metadata][created_time]}"
     document_id => "%{platform}_%{id}"
 	  user => elastic
 	  password => dazikzak

@@ -1,3 +1,4 @@
 docker-compose.yml
 
 elasticsearch/data
+logstash/pipeline/smm\.conf
